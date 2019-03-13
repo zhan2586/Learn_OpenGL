@@ -1,1 +1,14 @@
-﻿
+﻿  glad.c
+  main.cpp
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(93): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(94): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(98): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(99): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(100): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(101): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(228): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(234): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
+  stb_image.cpp
+  Generating Code...
+  LearnOpenGL.vcxproj -> C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\Debug\LearnOpenGL.exe
