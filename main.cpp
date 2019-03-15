@@ -187,38 +187,6 @@ int main()
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f, 1.0f
 	};
 
-	struct Vertex {
-		glm::vec3 Position;
-		glm::vec3 Normal;
-		glm::vec2 TexCoords;
-	};
-
-	struct Texture {
-		GLuint id;
-		string type;
-	};
-
-	class Mesh {
-		public:
-			// mesh data
-			vector<Vertex> vertices;
-			vector<GLuint> indices;
-			vector<Texture> textures;
-			// function
-			Mesh(vector<Vertex> vertices, vector<GLuint> indices, vector<Texture> textures) {
-				this->vertices = vertices;
-				this->indices = indices;
-				this->glad_glBindTexture = textures;
-
-				setupMesh();
-			}
-			void Draw(Shader shader);
-	private:
-		// render data
-		GLuint VAO, VBO, EBO;
-		// function
-		void setupMesh();
- 	};
 
 	// configure cube's VAO & VBO
 	GLuint VBO, cubeVAO;
