@@ -142,11 +142,12 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="include\glad\glad.h" />
-    <ClInclude Include="mesh.h" />
+    <ClInclude Include="include\model.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="1.colors.fs" />
-    <None Include="1.colors.vs" />
+    <None Include="1.model_loading.fs" />
+    <None Include="1.model_loading.vs" />
     <None Include="1.lamp.fs" />
     <None Include="1.lamp.vs" />
   </ItemGroup>
@@ -155,6 +156,9 @@
     <Image Include="container.jpg" />
     <Image Include="container2.png" />
     <Image Include="container2_specular.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LearnOpenGL.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

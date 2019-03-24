@@ -1,1 +1,12 @@
-﻿
+﻿  main.cpp
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(95): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(96): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(101): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(102): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(103): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(111): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(145): error C2653: 'FileSystem': is not a class or namespace name
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(145): error C3861: 'getPath': identifier not found
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(150): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(156): warning C4305: 'argument': truncation from 'double' to 'GLfloat'
