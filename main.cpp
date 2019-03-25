@@ -142,7 +142,7 @@ int main()
 
 	Shader ourShader("1.model_loading.vs", "1.model_loading.fs");
 
-	Model ourModel(FileSystem::getPath("nanosuit/nanosuit.obj"));
+	Model ourModel("nanosuit/nanosuit.obj");
 
 	// Render loop
 	while (!glfwWindowShouldClose(window)) 
