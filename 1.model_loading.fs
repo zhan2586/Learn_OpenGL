@@ -5,7 +5,6 @@ uniform vec3 lightColor;
 uniform vec3 lightPos;
 uniform vec3 viewPos;
 
-
 struct Material{
 	// vec3 ambient;
 	sampler2D diffuse;

@@ -22,7 +22,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{11E11A3A-6561-4A0D-9C73-5595DE5E5C0F}</ProjectGuid>
     <RootNamespace>OpenGLFirst</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
     <ProjectName>LearnOpenGL</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library\assimp;C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\wenyu\Documents\GitHub\Learn_OpenGL\include;$(IncludePath)</IncludePath>
@@ -83,8 +83,8 @@
     <LibraryPath>C:\Users\wenyu\Documents\GitHub\Learn_OpenGL\library;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath)</IncludePath>
     <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library\assimp;C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -150,6 +150,8 @@
     <None Include="1.model_loading.vs" />
     <None Include="1.lamp.fs" />
     <None Include="1.lamp.vs" />
+    <None Include="Cubemap.fs" />
+    <None Include="Cubemap.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="awesomeface.png" />
