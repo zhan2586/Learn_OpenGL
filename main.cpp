@@ -110,7 +110,6 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 	camera.ProcessMouseScroll(yoffset);
 }
 
-
 unsigned int loadCubeMap(vector<std::string> faces) {
 	
 	GLuint textureID;
@@ -284,17 +283,18 @@ int main()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
+
 	// load textures
 	// unsigned int cubeTexture = loadTexture:"textures/marbles.jpg"
-	
+
 	vector<std::string> faces
 	{
-		loadTexture("skybox/right.jpg"),
-		loadTexture("skybox/right.jpg"),
-		loadTexture("skybox/right.jpg"),
-		loadTexture("skybox/right.jpg"),
-		loadTexture("skybox/right.jpg"),
-		loadTexture("skybox/right.jpg")
+		"skybox/right.jpg",
+		"skybox/left.jpg",
+		"skybox/top.jpg",
+		"skybox/bottom.jpg",
+		"skybox/front.jpg",
+		"skybox/back.jpg"
 	};
 	unsigned int cubemapTexture = loadCubeMap(faces);
 
@@ -304,34 +304,6 @@ int main()
 
 	skyboxShader.use();
 	skyboxShader.setInt("skybox", 0);
-
-	GLuint framebuffer;
-	glGenFramebuffers(1, &framebuffer);
-	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-
-	GLuint texColorBuffer;
-	glGenTextures(1, &texColorBuffer);
-	glBindTexture(GL_TEXTURE_2D, texColorBuffer);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 800, 600, 0, GL_RGB, GL_UNSIGNED_BYTE, NULL);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texColorBuffer, 0);
-	// glBindTexture(GL_TEXTURE_2D, 0);
-
-	GLuint rbo;
-	glGenRenderbuffers(1, &rbo);
-	glBindRenderbuffer(GL_RENDERBUFFER, rbo);	
-	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, 800, 600);
-	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, rbo);
-	
-	if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-		{
-			std::cout << "Framebuffer is not complete." << std::endl;
-		}
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	// glDeleteFramebuffers(1, &framebuffer);
-
 	
 	// Render loop
 	while (!glfwWindowShouldClose(window)) 
@@ -342,31 +314,29 @@ int main()
 		
 		processInput(window);
 		
-		// Pass 1
-		glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
-		glEnable(GL_DEPTH_TEST);
-
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		// draw scene as normal
 		shader.use();
-
-		// view transform	
-		glm::mat4 P = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f, 100.0f);
-		shader.setMat4("P", P);
+		glm::mat4 M = glm::mat4(1.0f);
 		glm::mat4 V = camera.GetViewMatrix();
-		shader.setMat4("V", V);
-		// render loaded model
-		glm::mat4 M = glm::mat2(1.0f);
-		M = glm::translate(M, glm::vec3(0.0f, -1.75f, 0.0f));
-		M = glm::scale(M, glm::vec3(0.2f, 0.2f, 0.2f));
+		glm::mat4 P = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f, 100.0f);
 		shader.setMat4("M", M);
+		shader.setMat4("V", V);
+		shader.setMat4("P", P);
+		shader.setVec3("cameraPos", camera.Position);
+	
+		// render loaded model
+		// glm::mat4 M = glm::mat4(1.0f);
+		M = glm::translate(M, glm::vec3(0.0f, -1.75f, 0.0f));
+		M = glm::scale(M, glm::vec3(0.2f, 0.2f, 0.2f));	
 		ourModel.Draw(shader);
 
 		// cubes
 		glBindVertexArray(cubeVAO);
 		glActiveTexture(GL_TEXTURE0);
-		// glBindTexture(GL_TEXTURE_2D, cubeTexture);
+		glBindTexture(GL_TEXTURE_2D, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 
@@ -381,7 +351,7 @@ int main()
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(skyboxVAO);
+		glBindVertexArray(0);
 		glDepthFunc(GL_LESS);
 
 		glfwSwapBuffers(window);

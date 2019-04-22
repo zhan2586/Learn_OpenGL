@@ -1,3 +1,5 @@
-*.ipch
-*.opendb
 ./Debug/.
+.vs/.
+*.opendb
+.vs/LearnOpenGL/v15/.suo
+*.obj

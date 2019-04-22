@@ -1,17 +1,1 @@
-﻿  main.cpp
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(94): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(95): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(99): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(101): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(102): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(121): warning C4018: '<': signed/unsigned mismatch
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(287): error C2440: 'initializing': cannot convert from 'initializer list' to 'std::vector<std::string,std::allocator<_Ty>>'
-          with
-          [
-              _Ty=std::string
-          ]
-  c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(294): note: No constructor could take the source type, or constructor overload resolution was ambiguous
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(301): error C2065: 'screenShader': undeclared identifier
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(302): error C2065: 'screenShader': undeclared identifier
+﻿
