@@ -20,19 +20,19 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
+// settings
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
 // camera
-Camera camera(glm::vec3(-3.0f, 0.9f, 4.0f));
-float lastX = 800.0f / 2.0;
-float lastY = 600.0 / 2.0;
+Camera camera(glm::vec3(1.0f, 1.0f, 3.0f));
+float lastX = SCR_WIDTH / 2.0f;
+float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
 
 // timing
 float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
-
-// lighting
-glm::vec3 lightPos(1.0f, 0.0f, 1.5f);
-glm::vec3 lightColor(0.6f, 0.1f, 0.1f);
 
 void processInput(GLFWwindow *window)
 {
@@ -98,6 +98,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 
 	float xoffset = xpos - lastX;
 	float yoffset = lastY - ypos; // reversed since y-coordinates go from bottom to top
+
 	lastX = xpos;
 	lastY = ypos;
 
@@ -167,51 +168,52 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 
 	Shader shader("1.model_loading.vs", "1.model_loading.fs");
-	Shader skyboxShader("Cubemap.vs", "Cubemap.fs");
+	Shader skyboxShader("skybox.vs", "skybox.fs");
+
+	Model ourModel("nanosuit/nanosuit.obj");
 
 	float cubeVertices[] = {
-		// positions          // texture Coords
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f, 1.0f,
 
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
-		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
-		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
-		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+	-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 	};
 
 	float skyboxVertices[] = {
@@ -259,19 +261,19 @@ int main()
 		 1.0f, -1.0f,  1.0f
 	};
 
-	Model ourModel("nanosuit/nanosuit.obj");
+	// Model ourModel("nanosuit/nanosuit.obj");
 
 	// cube VAO
-	GLuint cubeVAO, cubeVBO;
-	glGenVertexArrays(1, &cubeVAO);
-	glGenBuffers(1, &cubeVBO);
-	glBindVertexArray(cubeVAO);
-	glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	//GLuint cubeVAO, cubeVBO;
+	//glGenVertexArrays(1, &cubeVAO);
+	//glGenBuffers(1, &cubeVBO);
+	//glBindVertexArray(cubeVAO);
+	//glBindBuffer(GL_ARRAY_BUFFER, cubeVBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), &cubeVertices, GL_STATIC_DRAW);
+	//glEnableVertexAttribArray(0);
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(1);
+	//glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 
 	// skybox VAO
 	unsigned int skyboxVAO, skyboxVBO;
@@ -283,9 +285,8 @@ int main()
 	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-
 	// load textures
-	// unsigned int cubeTexture = loadTexture:"textures/marbles.jpg"
+	unsigned int cubeTexture = loadTexture("container2.png");
 
 	vector<std::string> faces
 	{
@@ -298,19 +299,12 @@ int main()
 	};
 	unsigned int cubemapTexture = loadCubeMap(faces);
 
-	//shader configureation
-	shader.use();
-	shader.setInt("texture1", 0);
-
-	skyboxShader.use();
-	skyboxShader.setInt("skybox", 0);
-	
 	// Render loop
 	while (!glfwWindowShouldClose(window)) 
 	{		
-		//float currentFrame = glfwGetTime();
-		//deltaTime = currentFrame - lastFrame;
-		//lastFrame = currentFrame;
+		float currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
 		
 		processInput(window);
 		
@@ -319,31 +313,30 @@ int main()
 
 		// draw scene as normal
 		shader.use();
-		glm::mat4 M = glm::mat4(1.0f);
+		
 		glm::mat4 V = camera.GetViewMatrix();
 		glm::mat4 P = glm::perspective(glm::radians(camera.Zoom), 800.0f / 600.0f, 0.1f, 100.0f);
-		shader.setMat4("M", M);
+	
 		shader.setMat4("V", V);
 		shader.setMat4("P", P);
-		shader.setVec3("cameraPos", camera.Position);
-	
-		// render loaded model
-		// glm::mat4 M = glm::mat4(1.0f);
-		M = glm::translate(M, glm::vec3(0.0f, -1.75f, 0.0f));
-		M = glm::scale(M, glm::vec3(0.2f, 0.2f, 0.2f));	
+
+		glm::mat4 M = glm::mat4(1.0f);
+		M = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
+		M = glm::scale(M, glm::vec3(0.1f, 0.1f, 0.1f));
+		shader.setMat4("M", M);
 		ourModel.Draw(shader);
 
 		// cubes
-		glBindVertexArray(cubeVAO);
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, cubemapTexture);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
-		glBindVertexArray(0);
+		//glBindVertexArray(cubeVAO);
+		//glActiveTexture(GL_TEXTURE0);
+		//glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glBindVertexArray(0);
 
 		// draw skybox as last
 		glDepthFunc(GL_LEQUAL);
 		skyboxShader.use();
-		V = glm::mat4(glm::mat3(camera.GetViewMatrix()));
+	    V = glm::mat4(glm::mat3(camera.GetViewMatrix()));
 		skyboxShader.setMat4("V", V);
 		skyboxShader.setMat4("P", P);
 		// skybox cube
@@ -352,11 +345,15 @@ int main()
 		glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
-		glDepthFunc(GL_LESS);
+		glDepthFunc(GL_LEQUAL);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();		
 	}
+	//glDeleteVertexArrays(1, &cubeVAO);
+	glDeleteVertexArrays(1, &skyboxVAO);
+	//glDeleteBuffers(1, &cubeVBO);
+	glDeleteBuffers(1, &skyboxVAO);
 
 	glfwTerminate();
 
