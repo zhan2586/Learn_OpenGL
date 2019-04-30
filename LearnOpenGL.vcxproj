@@ -22,8 +22,8 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{11E11A3A-6561-4A0D-9C73-5595DE5E5C0F}</ProjectGuid>
     <RootNamespace>OpenGLFirst</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
     <ProjectName>LearnOpenGL</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library\assimp;C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library;C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library\assimp;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\wenyu\Documents\GitHub\Learn_OpenGL\include;$(IncludePath)</IncludePath>
@@ -83,8 +83,8 @@
     <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library\assimp;C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library;$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library;C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\library\assimp;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
+    <IncludePath>C:\Users\Wenyu\Documents\Repositories\Learn_OpenGL\include;$(IncludePath);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -96,6 +96,9 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;assimpd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib</AdditionalLibraryDirectories>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -125,6 +128,9 @@
       <AdditionalDependencies>opengl32.lib;glfw3.lib;assimpd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\lib</AdditionalLibraryDirectories>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -155,8 +161,8 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="1.model_loading.fs" />
-    <None Include="1.model_loading.vs" />
+    <None Include="normal_mapping_fs.glsl" />
+    <None Include="normal_mapping_vs.glsl" />
     <None Include="1.lamp.fs" />
     <None Include="1.lamp.vs" />
     <None Include="skybox.fs" />

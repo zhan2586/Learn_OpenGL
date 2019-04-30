@@ -3,3 +3,8 @@
 *.opendb
 .vs/LearnOpenGL/v15/.suo
 *.obj
+.vs/LearnOpenGL/v15/Browse.VC.db
+.vs/LearnOpenGL/v15/ipch/2ff41bc1bdd0ce34.ipch
+.vs/LearnOpenGL/v15/ipch/AutoPCH/4de35d251e49a57d/GLAD.ipch
+.vs/LearnOpenGL/v15/ipch/AutoPCH/86279278a8b9e4a0/MAIN.ipch
+.vs/LearnOpenGL/v15/ipch/AutoPCH/fa1f680ad2b3fdeb/MAIN.ipch

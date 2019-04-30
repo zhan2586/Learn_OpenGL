@@ -1,13 +1,1 @@
-﻿  glad.c
-  main.cpp
-c:\users\wenyu\documents\repositories\learn_opengl\include\mesh.h(88): warning C4267: 'argument': conversion from 'size_t' to 'GLsizei', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(94): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(95): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(99): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(100): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(101): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(102): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-c:\users\wenyu\documents\repositories\learn_opengl\main.cpp(110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  stb_image.cpp
-  Generating Code...
-MSVCRTD.lib(chkstk.obj) : fatal error LNK1112: module machine type 'x86' conflicts with target machine type 'x64'
+﻿LINK : fatal error LNK1104: cannot open file 'MSVCRTD.lib'
