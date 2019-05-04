@@ -20,7 +20,7 @@ const GLuint SCR_WIDTH = 800;
 const GLuint SCR_HEIGHT = 600;
 
 // camera
-Camera camera(glm::vec3(1.0f, 1.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -134,21 +134,23 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Learn OpenGL", NULL, NULL);
-	
+	GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "Learn OpenGL Chapter 5", NULL, NULL);	
 	glfwMakeContextCurrent(window);
-	// glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+
+	// setup peripheral callback functions
 	glfwSetCursorPosCallback(window, mouse_callback);
 	glfwSetScrollCallback(window, scroll_callback);
-
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		return -1;
 	}
 
+	// Define the viewport dimensions
+	glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+
+	// Setup some OpenGL options
 	glEnable(GL_DEPTH_TEST);
 
 	Shader shader("normal_mapping_vs.glsl", "normal_mapping_fs.glsl");
@@ -213,7 +215,7 @@ int main()
 		// Keyboard and mouse input
 		processInput(window);
 		
-		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// configure V P matrices
@@ -225,11 +227,16 @@ int main()
 
 		// render plane
 		glm::mat4 M = glm::mat4(1.0f);
+		M = glm::rotate(M, 45.0f, glm::normalize(glm::vec3(0.0, 1.0, 0.0)));
 		//M = glm::translate(M, glm::vec3(0.0f, 0.0f, 0.0f));
 		// M = glm::scale(M, glm::vec3(0.1f, 0.1f, 0.1f));
 		shader.setMat4("M", M);
 		shader.setVec3("lightPos", lightPos);
-		shader.setVec3("viewPos", camera.Position);		
+		shader.setVec3("viewPos", camera.Position);	
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, diffuseMap);
+		glActiveTexture(GL_TEXTURE1);
+		glBindTexture(GL_TEXTURE_2D, normalMap);
 
 		glBindVertexArray(quadVAO);
 		glDrawArrays(GL_TRIANGLES, 0, 6);

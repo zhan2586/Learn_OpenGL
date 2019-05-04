@@ -9,11 +9,13 @@ uniform mat4 P;
 uniform vec3 lightPos;
 uniform vec3 viewPos;
 
-out vec4 gl_Position;
+out vec3 fragPos;
 out vec2 TexCoords;
 
 void main()
 {	
 	TexCoords = texCoords;
+	
 	gl_Position = P*V*M * vec4(position, 1.0);	
+	fragPos = vec3(M * vec4(position, 1.0));
 }
