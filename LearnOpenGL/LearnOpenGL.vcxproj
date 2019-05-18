@@ -163,8 +163,8 @@
     <Image Include="brickwall_normal.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="normal_fs.glsl" />
-    <None Include="normal_vs.glsl" />
+    <None Include="pbr_fs.glsl" />
+    <None Include="pbr_vs.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
